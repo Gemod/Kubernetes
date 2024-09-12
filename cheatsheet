@@ -1,0 +1,15 @@
+#createpod
+Kubectl run namePod —image=nomeimage, esempio -> kubectl run redis —image=redis
+
+#listpod
+Kubectl get pod
+
+
+#delete pod
+Kubectl delete pod podName
+
+#info about pod
+Kubectl describe pod podName
+
+#additional info about pod
+Kubectl get pod pod name -o wide 
