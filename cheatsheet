@@ -5,11 +5,15 @@ Kubectl run namePod —image=nomeimage, esempio -> kubectl run redis —image=re
 Kubectl get pod
 
 
+
+
 #delete pod
 Kubectl delete pod podName
 
 #info about pod
 Kubectl describe pod podName
 
-#additional info about pod
+#additional info about pod (such as, on which node is deployed my pod)
 Kubectl get pod pod name -o wide 
+
+

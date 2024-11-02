@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: deploy
+  labels:
+    app: test
+    tier: be
+spec:
+  template:
+    metadata: 
+      labels:
+        app: test
+        tier: be
+    spec:
+      containers:
+        - name: test-nginx
+          image: nginx
+          ports:
+          - containerPort: 80
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: be

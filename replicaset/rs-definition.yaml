@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: myrs
+  labels:
+    app: test
+    tier: be
+spec:
+  template:
+    metadata: 
+      name: mypod
+      labels:
+        app: test
+        tier: be
+    spec:
+      containers:
+        - name: test-nginx
+          image: nginx
+          ports:
+          - containerPort: 80
+  replicas: 3
+  selector:
+    matchLabels:
+      app: test
