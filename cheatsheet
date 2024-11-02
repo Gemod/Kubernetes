@@ -1,11 +1,12 @@
+#cluster info
+kubectl cluster-info
+
 #createpod
-Kubectl run namePod —image=nomeimage, esempio -> kubectl run redis —image=redis
+Kubectl run podName --image=imageName
+example -> kubectl run redis --image=redis
 
 #listpod
 Kubectl get pod
-
-
-
 
 #delete pod
 Kubectl delete pod podName
@@ -14,6 +15,16 @@ Kubectl delete pod podName
 Kubectl describe pod podName
 
 #additional info about pod (such as, on which node is deployed my pod)
-Kubectl get pod pod name -o wide 
+Kubectl get pod podName -o wide 
 
+
+#all info about pod definition file
+kubectl get pod podName -o yaml
+
+#custom column info
+kubectl get po podName -o custom-column=NAME:metadata.name,POD_ID:status.podIP
+
+
+#access to container
+kubectl exec -it podName --sh
 
