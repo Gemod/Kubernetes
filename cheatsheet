@@ -28,3 +28,6 @@ kubectl get po podName -o custom-column=NAME:metadata.name,POD_ID:status.podIP
 #access to container
 kubectl exec -it podName --sh
 
+
+#looking for pod in namespace
+kubectl get po -n namespaceName OR --namespace namespaceName
