@@ -1,0 +1,4 @@
+server.port: 8080
+greeting:
+  name: Gemod
+  message: Hi there
