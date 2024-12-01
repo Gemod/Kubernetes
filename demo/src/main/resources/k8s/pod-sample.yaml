@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+  labels:
+    app: test
+    tier: be
+spec:
+  containers:
+  - env:
+    - name: ENV_VAR
+      value: jerry
+    image: gemod/configmap:1.0
+    imagePullPolicy: Always
+    name: test-spring
+    resources: {}
+    volumeMounts:
+    - name: config-volume
+      mountPath: /app/config
+  volumes:
+  - name: config-volume
+    configMap:
+      name: spring-app

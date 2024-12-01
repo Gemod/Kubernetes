@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  application.yml: |- 
+    greeting:
+      name: Gemod
+      message: Hi there
+metadata:
+  name: spring-app
+  namespace: default

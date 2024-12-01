@@ -32,3 +32,4 @@ kubectl exec -it podName --sh
 #looking for pod in namespace
 kubectl get po (-n namespaceName OR --namespace namespaceName)
 
+
