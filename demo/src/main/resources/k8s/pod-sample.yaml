@@ -13,7 +13,6 @@ spec:
     image: gemod/configmap:1.0
     imagePullPolicy: Always
     name: test-spring
-    resources: {}
     volumeMounts:
     - name: config-volume
       mountPath: /app/config
