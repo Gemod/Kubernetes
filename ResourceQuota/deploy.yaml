@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-resource-quota
+  name: test-resource-quota
+  namespace: dev
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: test-resource-quota
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test-resource-quota
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+status: {}
