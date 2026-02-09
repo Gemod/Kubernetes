@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: print-version-deploy
+  namespace: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: print-version
+  template:
+    metadata:
+      labels:
+        app: print-version
+    spec:
+      containers:
+        - name: print-version
+          image: gemod/print-version:v6
+          imagePullPolicy: Always
+          env:
+            - name: APP_VERSION
+              valueFrom:
+                secretKeyRef:
+                  name: app-version-secret
+                  key: APP_VERSION
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-service
+  namespace: test
+spec:
+  type: ClusterIP
+  selector:
+    app: print-version
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-version-secret
+  namespace: test
+type: Opaque
+data:
+  APP_VERSION: djQuMA==   #base64("v4.0")

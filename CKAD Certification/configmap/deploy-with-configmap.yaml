@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fastapi-app
+  name: fastapi-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-app
+  template:
+    metadata:
+      labels:
+        app: fastapi-app
+    spec:
+      containers:
+        - name: print-version
+          image: gemod/print-version:v4
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:              
+                name: app-config         #load all configmap keys
+          env:
+            - name: APP_VERSION          #load all a specific ConfigMap key
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: APP_VERSION
+          volumeMounts:                  # mount all ConfigMaps as file
+            - name: configmap
+              mountPath: /configmap
+              readOnly: true
+      volumes:
+        - name: configmap
+          configMap:                     
+            name: app-config

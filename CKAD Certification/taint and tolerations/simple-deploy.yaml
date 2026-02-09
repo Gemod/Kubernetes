@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: simple-deploy
+  name: simple-deploy
+spec:
+  replicas: 15
+  selector:
+    matchLabels:
+      app: simple-deploy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: simple-deploy
+    spec:
+      tolerations:
+      - key: "app"
+        value: "blue"
+        operator: "Equal"
+        effect: "NoExecute"
+      containers:
+      - image: nginx
+        name: nginx
+        resources: 
+          requests:
+            cpu: 10m
+            memory: 10Mi
+status: {}

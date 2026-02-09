@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: pod
+  name: pod-label-sconosciuta
+spec:
+  nodeSelector:
+    disktype: gpu
+  containers:
+  - image: nginx
+    name: pod
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

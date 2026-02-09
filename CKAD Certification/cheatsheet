@@ -2,20 +2,20 @@
 kubectl cluster-info
 
 #createpod
-Kubectl run podName --image=imageName
+kubectl run podName --image=imageName
 example -> kubectl run redis --image=redis
 
 #listpod
-Kubectl get pod
+kubectl get pod OR kubectl get po OR kubectl get pods
 
 #delete pod
-Kubectl delete pod podName
+kubectl delete pod podName
 
 #info about pod
-Kubectl describe pod podName
+kubectl describe pod podName
 
-#additional info about pod (such as, on which node is deployed my pod)
-Kubectl get pod podName -o wide 
+#additional info about pod (such as, on which node is deployed my pod, node IP)
+kubectl get pod podName -o wide 
 
 
 #all info about pod definition file

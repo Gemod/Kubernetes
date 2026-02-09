@@ -1,6 +1,8 @@
 # Usa un'immagine Python leggera
 FROM python:3.11-slim
 
+
+RUN apt update && apt install -y procps && rm -rf /var/lib/apt/lists/*
 # Imposta la working directory
 WORKDIR /app
 
