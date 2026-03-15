@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: probe-master
+  name: probe-master
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: probe-master
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: probe-master
+    spec:
+      containers:
+      - image: gemod/probes-go:1.0.0
+        name: probes-go
+        resources: {}
+        envFrom:
+        - configMapRef:
+            name: probe-config
+        startupProbe:
+          httpGet:
+            port: 8080
+            path: /startup
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /liveness
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 8080
+            path: /readiness
+          initialDelaySeconds: 5
+          periodSeconds: 5
+status: {}
