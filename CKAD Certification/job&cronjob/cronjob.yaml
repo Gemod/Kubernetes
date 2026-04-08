@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello-cronjob
+spec:
+  schedule: '*/1 * * * *'   # ogni minuto
+  concurrencyPolicy: Forbid  # evita run sovrapposti
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      completions: 1          # quante volte deve completarsi
+      parallelism: 1          # quanti Pod girano in parallelo
+      backoffLimit: 3         # quanti retry in caso di errore
+      activeDeadlineSeconds: 120 # Il Job ha max 2 minuti per terminare. 
+      #Terminati i quali k8s lo termina forzatamente insieme a tutti i pod che ha creato!
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: hello
+            image: busybox
+            command: ['sh', '-c', 'echo "Sono le: $(date)"']
