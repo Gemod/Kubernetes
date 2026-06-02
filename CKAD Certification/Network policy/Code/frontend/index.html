@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minikube Fullstack Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 720px;
+      margin: 60px auto;
+      padding: 0 20px;
+      line-height: 1.5;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #result {
+      margin-top: 24px;
+      padding: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      min-height: 24px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Frontend su Minikube</h1>
+  <p>Premi il pulsante per chiamare il backend Go esposto tramite Ingress.</p>
+
+  <button id="callApiBtn">Chiama Backend</button>
+
+  <div id="result">Nessuna chiamata eseguita.</div>
+
+  <script>
+    const button = document.getElementById("callApiBtn");
+    const result = document.getElementById("result");
+
+    button.addEventListener("click", async () => {
+      result.textContent = "Chiamata in corso...";
+
+      try {
+        // Importante: chiamata relativa.
+        // Il browser chiama http://fullstack.local/api/check-db
+        // L'Ingress manda /api al backend-go-service.
+        const response = await fetch("/api/check-db");
+        const data = await response.json();
+
+        if (!response.ok) {
+          result.textContent = "Errore: " + data.message;
+          return;
+        }
+
+        result.textContent = data.message;
+      } catch (error) {
+        console.error(error);
+        result.textContent = "Errore durante la chiamata al backend";
+      }
+    });
+  </script>
+</body>
+</html>
